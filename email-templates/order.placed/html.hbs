@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            margin-top: 32px;
+            border-radius: 0;
+        }
+
+        .email-header {
+            text-align: center;
+            padding: 20px;
+            background-color: #2081c2;
+            color: white;
+        }
+
+        .email-body {
+            padding: 20px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .email-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #888888;
+        }
+
+        .order-details {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        .order-details th,
+        .order-details td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .order-details th {
+            background-color: #f2f2f2;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2081c2;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h1>Order Confirmation</h1>
+        </div>
+
+        <div class="email-body">
+            <p>Hi {{order.customer.first_name}},</p>
+            <p>Thank you for your order! We're excited to let you know that your order
+                <strong>#{{order.display_id}}</strong>
+                has been placed successfully.
+            </p>
+
+            <h3>Order Summary</h3>
+            <table class="order-details">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each order.items}}
+                    <tr>
+                        <td>{{this.title}}</td>
+                        <td>{{this.quantity}}</td>
+                        <td>{{this.total_formatted}}</td>
+                    </tr>
+                    {{/each}}
+                    <tr>
+                        <td>Shipping</td>
+                        <td>1</td>
+                        <td>{{order.shipping_total_formatted}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right;"><strong>Total</strong></td>
+                        <td><strong>{{order.total_formatted}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Shipping Information</h3>
+            <p>
+                {{order.shipping_address.first_name}} {{order.shipping_address.last_name}}<br>
+                {{order.shipping_address.address_1}}<br>
+                {{order.shipping_address.address_2}}<br>
+                {{order.shipping_address.city}}, {{order.shipping_address.postal_code}}<br>
+                {{order.shipping_address.country.display_name}}
+            </p>
+
+            <a href="#" class="button">Track your order</a>
+        </div>
+
+        <!-- Email Footer -->
+        <div class="email-footer">
+            <p>If you have any questions, feel free to contact our support team at <a
+                    href="mailto:support@yourstore.com">support@yourstore.com</a>.</p>
+            <p>&copy; 2024 Your Store. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

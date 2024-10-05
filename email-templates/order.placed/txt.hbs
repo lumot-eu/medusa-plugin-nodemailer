@@ -1,0 +1,27 @@
+Order Confirmation
+
+Hi {{order.customer.first_name}},
+
+Thank you for your order! We're excited to let you know that your order #{{order.display_id}} has been placed
+successfully.
+
+Order Summary
+
+Product Quantity Price
+{{#each order.items}}
+{{this.title}} {{this.quantity}} {{this.total_formatted}}
+{{/each}}
+Shipping 1 {{order.shipping_total_formatted}}
+Total {{order.total_formatted}}
+
+Shipping Information
+
+{{order.shipping_address.first_name}} {{order.shipping_address.last_name}}
+{{order.shipping_address.address_1}}
+{{order.shipping_address.address_2}}
+{{order.shipping_address.city}}, {{order.shipping_address.postal_code}}
+{{order.shipping_address.country.display_name}}
+
+If you have any questions, feel free to contact our support team at support@yourstore.com.
+
+© 2024 Your Store. All rights reserved.
