@@ -1,4 +1,4 @@
-# medusa-plugin-nodemailer-hbs
+# medusa-plugin-nodemailer
 
 A notification service based on Nodemailer & Handlebars templating engine.
 
@@ -7,52 +7,52 @@ A notification service based on Nodemailer & Handlebars templating engine.
 To install, run the following command in your terminal:
 
 ```bash
-npm install @lumot-eu/medusa-plugin-nodemailer-hbs
+npm install @lumot-eu/medusa-plugin-nodemailer
 ```
 
 Add the following values to your `medusa-config.js` file:
 
 ```javascript
 const plugins = [
-  // ...
-  {
-    resolve: "@lumot-eu/medusa-plugin-nodemailer-hbs",
-    options: {
-      fromAddress: process.env.MAIL_FROM_ADDRESS,
+	// ...
+	{
+		resolve: "@lumot-eu/medusa-plugin-nodemailer",
+		options: {
+			fromAddress: process.env.MAIL_FROM_ADDRESS,
 
-      // This object is passed directly into nodemailer.createTransport(),
-      // so any configuration options supported by nodemailer will work here.
-      // For more details, see: https://nodemailer.com/smtp/#1-single-connection
-      transport: {
-        host: process.env.MAIL_SMTP_HOST,
-        port: process.env.MAIL_SMTP_PORT,
-        auth: {
-          user: process.env.MAIL_SMTP_USER,
-          pass: process.env.MAIL_SMTP_PASS,
-        },
-        tls: {
-          // do not fail on invalid certs
-          rejectUnauthorized: false,
-        },
-      },
+			// This object is passed directly into nodemailer.createTransport(),
+			// so any configuration options supported by nodemailer will work here.
+			// For more details, see: https://nodemailer.com/smtp/#1-single-connection
+			transport: {
+				host: process.env.MAIL_SMTP_HOST,
+				port: process.env.MAIL_SMTP_PORT,
+				auth: {
+					user: process.env.MAIL_SMTP_USER,
+					pass: process.env.MAIL_SMTP_PASS,
+				},
+				tls: {
+					// do not fail on invalid certs
+					rejectUnauthorized: false,
+				},
+			},
 
-      // Path to the directory where your email templates are stored
-      templateDir: "email-templates",
+			// Path to the directory where your email templates are stored
+			templateDir: "email-templates",
 
-      // Maps templates to MedusaJS events
-      // Only events listed here will be subscribed to.
-      templateMap: {
-        // "eventName": {
-        //   name: "templateName"
-        //   subject: "E-mail subject"
-        // }
-        "order.placed": {
-          name: "order.placed",
-          subject: "Order confirmation",
-        },
-      },
-    },
-  },
+			// Maps templates to MedusaJS events
+			// Only events listed here will be subscribed to.
+			templateMap: {
+				// "eventName": {
+				//   name: "templateName"
+				//   subject: "E-mail subject"
+				// }
+				"order.placed": {
+					name: "order.placed",
+					subject: "Order confirmation",
+				},
+			},
+		},
+	},
 ];
 ```
 

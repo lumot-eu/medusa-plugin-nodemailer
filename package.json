@@ -1,10 +1,10 @@
 {
-	"name": "@lumot-eu/medusa-plugin-nodemailer-hbs",
+	"name": "@lumot-eu/medusa-plugin-nodemailer",
 	"version": "1.0.2",
 	"description": "A notification service based on Nodemailer & Handlebars templating engine.",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/lumot-eu/medusa-plugin-nodemailer-hbs.git"
+		"url": "git+https://github.com/lumot-eu/medusa-plugin-nodemailer.git"
 	},
 	"author": "Lukáš Török",
 	"license": "MIT",
@@ -43,7 +43,7 @@
 	],
 	"main": "index.js",
 	"bugs": {
-		"url": "https://github.com/lumot-eu/medusa-plugin-nodemailer-hbs/issues"
+		"url": "https://github.com/lumot-eu/medusa-plugin-nodemailer/issues"
 	},
-	"homepage": "https://github.com/lumot-eu/medusa-plugin-nodemailer-hbs#readme"
+	"homepage": "https://github.com/lumot-eu/medusa-plugin-nodemailer#readme"
 }
