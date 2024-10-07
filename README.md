@@ -37,7 +37,17 @@ const plugins = [
 			},
 
 			// Path to the directory where your email templates are stored
-			templateDir: "email-templates",
+			templatesDir: "email-templates",
+
+			// Path to the directory where your layouts are stored
+			layoutsDir: "email-templates/_layouts",
+
+			// Path to the directory where your partials are stored
+			partialsDir: "email-templates/_partials",
+
+			// The name or file path of a template within the `layoutsDir` that will be used as the default layout.
+			// To disable the use of a default layout, you can provide a falsy value
+			defaultLayout: "default.hbs",
 
 			// Maps templates to MedusaJS events
 			// Only events listed here will be subscribed to.
@@ -58,4 +68,6 @@ const plugins = [
 
 ### E-mail templates
 
-Templates for each event should be placed in a sub-directory matching the name specified in the templateMap: eg. `{templateDir}/order.placed`. The sub-directory must contain two files: `html.hbs` for the HTML version and `txt.hbs` for the plain text version of the email.
+Templates for each event should be placed in a sub-directory matching the name specified in the templateMap: eg. `{templatesDir}/order.placed`. The sub-directory must contain two files: `html.hbs` for the HTML version and `txt.hbs` for the plain text version of the email.
+
+If you'd like to try the example email templates, simply comment out templatesDir, layoutsDir, and partialsDir in your configuration.

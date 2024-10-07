@@ -6,7 +6,10 @@ const hbs = require("nodemailer-express-handlebars");
 interface EmailConfig {
 	fromAddress: string;
 	transport: Object;
-	templateDir: string;
+	templatesDir: string;
+	layoutsDir: string;
+	partialsDir: string;
+	defaultLayout: string | boolean;
 	templateMap: Object;
 }
 
@@ -28,6 +31,9 @@ class EmailSenderService extends NotificationService {
 		this.lineItemService = container.lineItemService;
 		this.logger = container.logger;
 
+		const defaultTemplatesDir =
+			"node_modules/@lumot-eu/medusa-plugin-nodemailer/email-templates";
+
 		this.config = {
 			fromAddress: "noreply@medusajs.com",
 			transport: {
@@ -35,8 +41,10 @@ class EmailSenderService extends NotificationService {
 				path: "/usr/sbin/sendmail",
 				newline: "unix",
 			},
-			templateDir:
-				"node_modules/@lumot-eu/medusa-plugin-nodemailer-hbs/email-templates",
+			templatesDir: defaultTemplatesDir,
+			layoutsDir: `${defaultTemplatesDir}/_layouts`,
+			partialsDir: `${defaultTemplatesDir}/_partials`,
+			defaultLayout: "default.hbs",
 			templateMap: {
 				"order.placed": {
 					name: "order.placed",
@@ -48,9 +56,7 @@ class EmailSenderService extends NotificationService {
 
 		this.transporter = nodemailer.createTransport(this.config.transport);
 
-		this.logger.info(
-			"[plugin-nodemailer-hbs] EmailSender service initialized."
-		);
+		this.logger.info("[plugin-nodemailer] EmailSender service initialized.");
 	}
 
 	async sendNotification(
@@ -122,7 +128,9 @@ class EmailSenderService extends NotificationService {
 			"compile",
 			hbs({
 				viewEngine: {
-					defaultLayout: false,
+					layoutsDir: this.config.layoutsDir,
+					partialsDir: this.config.partialsDir,
+					defaultLayout: this.config.defaultLayout,
 					extname: ".hbs",
 					/*helpers:  {
 					    divide: function (a, b, opts) {
@@ -130,13 +138,13 @@ class EmailSenderService extends NotificationService {
 					    },
 					},*/
 				},
-				viewPath: this.config.templateDir,
+				viewPath: this.config.templatesDir,
 				extName: ".hbs",
 			})
 		);
 
 		this.logger.info(
-			`[plugin-nodemailer-hbs] Sending an email to '${toAddress}' using the "${templateName}" template.`
+			`[plugin-nodemailer] Sending an email to '${toAddress}' using the "${templateName}" template.`
 		);
 
 		await this.transporter.sendMail({

@@ -3,7 +3,10 @@ import { NotificationService, Logger, OrderService } from "medusa-interfaces";
 interface EmailConfig {
 	fromAddress: string;
 	transport: Object;
-	templateDir: string;
+	templatesDir: string;
+	layoutsDir: string;
+	partialsDir: string;
+	defaultLayout: string | boolean;
 	templateMap: Object;
 }
 
