@@ -11,6 +11,7 @@ interface EmailConfig {
 	partialsDir: string;
 	defaultLayout: string | boolean;
 	templateMap: Object;
+	hbsHelpers: Object;
 }
 
 class EmailSenderService extends NotificationService {
@@ -51,6 +52,7 @@ class EmailSenderService extends NotificationService {
 					subject: "Order confirmation",
 				},
 			},
+			hbsHelpers: {},
 			...options,
 		};
 
@@ -132,11 +134,7 @@ class EmailSenderService extends NotificationService {
 					partialsDir: this.config.partialsDir,
 					defaultLayout: this.config.defaultLayout,
 					extname: ".hbs",
-					/*helpers:  {
-					    divide: function (a, b, opts) {
-						    return a / b;
-					    },
-					},*/
+					helpers: this.config.hbsHelpers,
 				},
 				viewPath: this.config.templatesDir,
 				extName: ".hbs",

@@ -8,6 +8,7 @@ interface EmailConfig {
 	partialsDir: string;
 	defaultLayout: string | boolean;
 	templateMap: Object;
+	hbsHelpers: Object;
 }
 
 declare class EmailSenderService extends NotificationService {
