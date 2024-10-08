@@ -196,6 +196,7 @@ class EmailSenderService extends NotificationService {
 					);
 				});
 
+				order.reference = order.id.replace("order_", "");
 				order.items = order.items.map((item) => {
 					const { unit_price, total } = item;
 					const { currency_code } = order;
@@ -210,6 +211,12 @@ class EmailSenderService extends NotificationService {
 				return {
 					to: order.email,
 					order,
+				};
+			}
+			case eventName.includes("customer."): {
+				return {
+					to: eventData?.customer?.email || eventData?.email,
+					...eventData,
 				};
 			}
 			default: {
