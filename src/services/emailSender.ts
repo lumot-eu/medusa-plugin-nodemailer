@@ -219,6 +219,18 @@ class EmailSenderService extends NotificationService {
 					...eventData,
 				};
 			}
+			case eventName === "invite.created": {
+				return {
+					to: eventData.user_email,
+					...eventData,
+				};
+			}
+			case eventName === "user.password_reset": {
+				return {
+					to: eventData.email,
+					...eventData,
+				};
+			}
 			default: {
 				return {};
 			}
