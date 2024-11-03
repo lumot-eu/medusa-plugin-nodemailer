@@ -82,3 +82,6 @@ const plugins = [
 Templates for each event should be placed in a sub-directory matching the name specified in the templateMap: eg. `{templatesDir}/order.placed`. The sub-directory must contain two files: `html.hbs` for the HTML version and `txt.hbs` for the plain text version of the email.
 
 If you'd like to try the example email templates, simply comment out `templatesDir`, `layoutsDir`, and `partialsDir` in your configuration.
+
+### Custom events
+To send notifications for custom events, include `to` property in the event data payload. This property specifies the recipient e-mail address.
